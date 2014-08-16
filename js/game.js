@@ -1,8 +1,10 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.height = 533;
-canvas.width = 400;
+canvas.height = 512;
+canvas.width = 480;
+var height = canvas.height;
+var width = canvas.width;
 document.body.appendChild(canvas);
 
 // Background Image
@@ -45,11 +47,20 @@ chefBackImage.onload = function () {
 }
 chefBackImage.src = "images/chefback.png";
 
+// Oven Image
+var ovenReady = false;
+var ovenImage = new Image();
+ovenImage.onload = function () {
+    ovenReady = true;
+}
+ovenImage.src = "images/oven.png";
+
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
     direction: 'front' // Which way the chef is facing
-}
+};
+var oven = {};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -64,9 +75,11 @@ addEventListener("keyup", function (e) {
 
 // Resets the game; places the chef in the middle of the kitchen
 var reset = function () {
-    chef.x = canvas.width / 2;
-    chef.y = canvas.height / 2;
-}
+    chef.x = width / 2;
+    chef.y = height / 2;
+    oven.x = 4;
+    oven.y = height - 132;
+};
 
 var update = function (modifier) {
     if (38 in keysDown) { // Player holding up
@@ -89,10 +102,12 @@ var update = function (modifier) {
 
 // Draw everything
 var render = function () {
+    // Draw Background
     if (bgReady) {
         ctx.drawImage(bgImage, 0, 0);
     }
 
+    // Draw Chef
     switch (chef.direction) {
         case 'front':
             if (chefFrontReady) {
@@ -114,6 +129,11 @@ var render = function () {
                 ctx.drawImage(chefRightImage, chef.x, chef.y);
             }
             break;
+    }
+
+    // Draw Oven
+    if (ovenReady) {
+        ctx.drawImage(ovenImage, oven.x, oven.y);
     }
 };
 
