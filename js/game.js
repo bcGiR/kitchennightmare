@@ -1,8 +1,8 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.height = 800px;
-canvas.width = 600px;
+canvas.height = 533;
+canvas.width = 400;
 document.body.appendChild(canvas);
 
 // Background Image
@@ -11,7 +11,7 @@ var bgImage = new Image();
 bgImage.onload = function () {
     bgReady = true;
 }
-bgImage.src = "images/kitchenfloor.png"
+bgImage.src = "images/floor.png"
 
 // Chef Front Image
 var chefFrontReady = false;
@@ -48,7 +48,7 @@ chefBackImage.src = "images/chefback.png";
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
-    direction: front // Which way the chef is facing
+    direction: 'front' // Which way the chef is facing
 }
 
 // Handle keyboard controls
@@ -71,19 +71,19 @@ var reset = function () {
 var update = function (modifier) {
     if (38 in keysDown) { // Player holding up
         chef.y -= chef.speed * modifier;
-        chef.direction = back;
+        chef.direction = 'back';
     }
     if (40 in keysDown) { // Player holding down
         chef.y += chef.speed * modifier;
-        chef.direction = front;
+        chef.direction = 'front';
     }
     if (37 in keysDown) { // Player holding left
         chef.x -= chef.speed * modifier;
-        chef.direction = left;
+        chef.direction = 'left';
     }
     if (39 in keysDown) { // Player holding right
         chef.x += chef.speed * modifier;
-        chef.direction = right;
+        chef.direction = 'right';
     }
 };
 
@@ -94,22 +94,22 @@ var render = function () {
     }
 
     switch (chef.direction) {
-        case front:
+        case 'front':
             if (chefFrontReady) {
                 ctx.drawImage(chefFrontImage, chef.x, chef.y);
                 }
             break;
-        case back:
+        case 'back':
             if (chefBackReady) {
                 ctx.drawImage(chefBackImage, chef.x, chef.y);
             }
             break;
-        case left:
+        case 'left':
             if (chefLeftReady) {
                 ctx.drawImage(chefLeftImage, chef.x, chef.y);
             }
             break;
-        case right:
+        case 'right':
             if (chefRightReady) {
                 ctx.drawImage(chefRightImage, chef.x, chef.y);
             }
