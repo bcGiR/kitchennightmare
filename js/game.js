@@ -79,6 +79,14 @@ coolerImage.onload = function () {
 }
 coolerImage.src = "images/cooler.png";
 
+// Fridge Image
+var fridgeReady = false;
+var fridgeImage = new Image();
+fridgeImage.onload = function () {
+    fridgeReady = true;
+}
+fridgeImage.src = "images/fridge.png";
+
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
@@ -89,6 +97,7 @@ var grill = {};
 var fryer1 = {};
 var fryer2 = {};
 var cooler = {};
+var fridge = {};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -115,6 +124,8 @@ var reset = function () {
     fryer2.x = 16;
     cooler.x = width - 132;
     cooler.y = 132;
+    fridge.x = 132;
+    fridge.y = 4;
 };
 
 var update = function (modifier) {
@@ -143,30 +154,6 @@ var render = function () {
         ctx.drawImage(bgImage, 0, 0);
     }
 
-    // Draw Chef
-    switch (chef.direction) {
-        case 'front':
-            if (chefFrontReady) {
-                ctx.drawImage(chefFrontImage, chef.x, chef.y);
-                }
-            break;
-        case 'back':
-            if (chefBackReady) {
-                ctx.drawImage(chefBackImage, chef.x, chef.y);
-            }
-            break;
-        case 'left':
-            if (chefLeftReady) {
-                ctx.drawImage(chefLeftImage, chef.x, chef.y);
-            }
-            break;
-        case 'right':
-            if (chefRightReady) {
-                ctx.drawImage(chefRightImage, chef.x, chef.y);
-            }
-            break;
-    }
-
     // Draw Oven
     if (ovenReady) {
         ctx.drawImage(ovenImage, oven.x, oven.y);
@@ -189,9 +176,37 @@ var render = function () {
 
     // Draw Cooler
     if (coolerReady) {
-        ctx.drawImage(coolerImage, cooler.x, cooler.y)
+        ctx.drawImage(coolerImage, cooler.x, cooler.y);
     }
-                 
+
+    // Draw Fridge
+    if (fridgeReady) {
+        ctx.drawImage(fridgeImage, fridge.x, fridge.y);
+    }
+
+    // Draw Chef
+    switch (chef.direction) {
+        case 'front':
+            if (chefFrontReady) {
+                ctx.drawImage(chefFrontImage, chef.x, chef.y);
+                }
+            break;
+        case 'back':
+            if (chefBackReady) {
+                ctx.drawImage(chefBackImage, chef.x, chef.y);
+            }
+            break;
+        case 'left':
+            if (chefLeftReady) {
+                ctx.drawImage(chefLeftImage, chef.x, chef.y);
+            }
+            break;
+        case 'right':
+            if (chefRightReady) {
+                ctx.drawImage(chefRightImage, chef.x, chef.y);
+            }
+            break;
+    }             
 };
 
 // The main game loop
