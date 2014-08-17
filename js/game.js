@@ -55,12 +55,21 @@ ovenImage.onload = function () {
 }
 ovenImage.src = "images/oven.png";
 
+// Grill Image
+var grillReady = false;
+var grillImage = new Image();
+grillImage.onload = function () {
+    grillReady = true;
+}
+grillImage.src = "images/grill.png";
+
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
     direction: 'front' // Which way the chef is facing
 };
 var oven = {};
+var grill = {};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -79,6 +88,8 @@ var reset = function () {
     chef.y = height / 2;
     oven.x = 4;
     oven.y = height - 132;
+    grill.x = 4;
+    grill.y = oven.y - 132;
 };
 
 var update = function (modifier) {
@@ -134,6 +145,11 @@ var render = function () {
     // Draw Oven
     if (ovenReady) {
         ctx.drawImage(ovenImage, oven.x, oven.y);
+    }
+
+    // Draw Grill
+    if (grillReady) {
+        ctx.drawImage(grillImage, grill.x, grill.y);
     }
 };
 
