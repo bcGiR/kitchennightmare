@@ -87,6 +87,14 @@ fridgeImage.onload = function () {
 }
 fridgeImage.src = "images/fridge.png";
 
+// PassThrough Image
+var passReady = false;
+var passImage = new Image();
+passImage.onload = function () {
+    passReady = true;
+}
+passImage.src = "images/pass.png";
+
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
@@ -98,6 +106,7 @@ var fryer1 = {};
 var fryer2 = {};
 var cooler = {};
 var fridge = {};
+var pass = {};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -123,9 +132,11 @@ var reset = function () {
     fryer2.y = fryer1.y - 68;
     fryer2.x = 16;
     cooler.x = width - 132;
-    cooler.y = 132;
+    cooler.y = 116;
     fridge.x = 132;
     fridge.y = 4;
+    pass.x = width - 132;
+    pass.y = height - 260;
 };
 
 var update = function (modifier) {
@@ -182,6 +193,11 @@ var render = function () {
     // Draw Fridge
     if (fridgeReady) {
         ctx.drawImage(fridgeImage, fridge.x, fridge.y);
+    }
+
+    // Draw Pass
+    if (passReady) {
+        ctx.drawImage(passImage, pass.x, pass.y);
     }
 
     // Draw Chef
