@@ -63,6 +63,22 @@ grillImage.onload = function () {
 }
 grillImage.src = "images/grill.png";
 
+// Fryer Image
+var fryerReady = false;
+var fryerImage = new Image();
+fryerImage.onload = function () {
+    fryerReady = true; 
+}
+fryerImage.src = "images/fryer.png";
+
+// Cooler Image
+var coolerReady = false;
+var coolerImage = new Image();
+coolerImage.onload = function () {
+    coolerReady = true;
+}
+coolerImage.src = "images/cooler.png";
+
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
@@ -70,6 +86,9 @@ var chef = {
 };
 var oven = {};
 var grill = {};
+var fryer1 = {};
+var fryer2 = {};
+var cooler = {};
 
 // Handle keyboard controls
 var keysDown = {};
@@ -90,6 +109,12 @@ var reset = function () {
     oven.y = height - 132;
     grill.x = 4;
     grill.y = oven.y - 132;
+    fryer1.y = grill.y - 68;
+    fryer1.x = 16;
+    fryer2.y = fryer1.y - 68;
+    fryer2.x = 16;
+    cooler.x = width - 132;
+    cooler.y = 132;
 };
 
 var update = function (modifier) {
@@ -151,6 +176,22 @@ var render = function () {
     if (grillReady) {
         ctx.drawImage(grillImage, grill.x, grill.y);
     }
+
+    // Draw Fryer1
+    if (fryerReady) {
+        ctx.drawImage(fryerImage, fryer1.x, fryer1.y);
+    }
+
+    // Draw Fryer2
+    if (fryerReady) {
+        ctx.drawImage(fryerImage, fryer2.x, fryer2.y);
+    }
+
+    // Draw Cooler
+    if (coolerReady) {
+        ctx.drawImage(coolerImage, cooler.x, cooler.y)
+    }
+                 
 };
 
 // The main game loop
