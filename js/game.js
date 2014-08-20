@@ -19,6 +19,7 @@ var fryer2 = {};
 var cooler = {};
 var fridge = {};
 var pass = {};
+var equip = [ oven, grill, fryer1, fryer2, cooler, fridge, pass ];
 
 // Handle keyboard controls
 var keysDown = {};
@@ -33,27 +34,53 @@ addEventListener("keyup", function (e) {
 
 // Resets the game; places the chef in the middle of the kitchen
 var init = function () {
+
     chef.x = width / 2;
     chef.y = height / 2;
+
     oven.x = 4;
     oven.y = height - 132;
+    oven.width = 128;
+    oven.height = 128;
+
     grill.x = 4;
     grill.y = oven.y - 132;
+    grill.width = 128;
+    grill.height = 128;
+
     fryer1.y = grill.y - 68;
     fryer1.x = 16;
+    fryer1.width = 64;
+    fryer1.height = 64;
+
     fryer2.y = fryer1.y - 68;
     fryer2.x = 16;
+    fryer2.width = 128;
+    fryer2.height = 128;
+
     cooler.x = width - 132;
     cooler.y = 116;
+    cooler.width = 128;
+    cooler.height = 128;
+
     fridge.x = 132;
     fridge.y = 4;
+    fridge.width = 128;
+    fridge.height = 128;
+
     pass.x = width - 132;
     pass.y = height - 260;
+    pass.width = 128;
+    pass.height = 256;
 
     main();
 };
 
 var update = function (modifier) {
+
+    chef_oldx = chef.x;
+    chef_oldy = chef.y;
+
     if (38 in keysDown) { // Player holding up
         chef.y -= chef.speed * modifier;
         chef.direction = 'back';
@@ -70,18 +97,24 @@ var update = function (modifier) {
         chef.x += chef.speed * modifier;
         chef.direction = 'right';
     }
+
+    // Collision Resolution
+    
+    // Disallows chef from leaving the kitchen 
     if (chef.x < 0) {
-        chef.x = 0;
+        chef.x = chef_oldx;
     }
     if (chef.x > width - 64) {
-        chef.x = width - 64;
+        chef.x = chef_oldx;
     }
     if (chef.y < 0) {
-        chef.y = 0;
+        chef.y = chef_oldy;
     }
     if (chef.y > height - 64) {
-        chef.y = height - 64;
+        chef.y = chef_oldy;
     }
+
+    // Disallows chef from walking on top of equipment
 };
 
 // Draw everything
