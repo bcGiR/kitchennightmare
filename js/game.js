@@ -70,6 +70,18 @@ var update = function (modifier) {
         chef.x += chef.speed * modifier;
         chef.direction = 'right';
     }
+    if (chef.x < 0) {
+        chef.x = 0;
+    }
+    if (chef.x > width - 64) {
+        chef.x = width - 64;
+    }
+    if (chef.y < 0) {
+        chef.y = 0;
+    }
+    if (chef.y > height - 64) {
+        chef.y = height - 64;
+    }
 };
 
 // Draw everything
