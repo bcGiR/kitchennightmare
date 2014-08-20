@@ -7,94 +7,6 @@ var height = canvas.height;
 var width = canvas.width;
 document.body.appendChild(canvas);
 
-// Background Image
-var bgReady = false;
-var bgImage = new Image();
-bgImage.onload = function () {
-    bgReady = true;
-}
-bgImage.src = "images/floor.png"
-
-// Chef Front Image
-var chefFrontReady = false;
-var chefFrontImage = new Image();
-chefFrontImage.onload = function () {
-    chefFrontReady = true;
-}
-chefFrontImage.src = "images/cheffront.png";
-
-// Chef Right Image
-var chefRightReady = false;
-var chefRightImage = new Image();
-chefRightImage.onload = function () {
-    chefRightReady = true;
-}
-chefRightImage.src = "images/chefright.png";
-
-// Chef Left Image
-var chefLeftReady = false;
-var chefLeftImage = new Image();
-chefLeftImage.onload = function () {
-    chefLeftReady = true;
-}
-chefLeftImage.src = "images/chefleft.png";
-
-// Chef Back Image
-var chefBackReady = false;
-var chefBackImage = new Image();
-chefBackImage.onload = function () {
-    chefBackReady = true;
-}
-chefBackImage.src = "images/chefback.png";
-
-// Oven Image
-var ovenReady = false;
-var ovenImage = new Image();
-ovenImage.onload = function () {
-    ovenReady = true;
-}
-ovenImage.src = "images/oven.png";
-
-// Grill Image
-var grillReady = false;
-var grillImage = new Image();
-grillImage.onload = function () {
-    grillReady = true;
-}
-grillImage.src = "images/grill.png";
-
-// Fryer Image
-var fryerReady = false;
-var fryerImage = new Image();
-fryerImage.onload = function () {
-    fryerReady = true; 
-}
-fryerImage.src = "images/fryer.png";
-
-// Cooler Image
-var coolerReady = false;
-var coolerImage = new Image();
-coolerImage.onload = function () {
-    coolerReady = true;
-}
-coolerImage.src = "images/cooler.png";
-
-// Fridge Image
-var fridgeReady = false;
-var fridgeImage = new Image();
-fridgeImage.onload = function () {
-    fridgeReady = true;
-}
-fridgeImage.src = "images/fridge.png";
-
-// PassThrough Image
-var passReady = false;
-var passImage = new Image();
-passImage.onload = function () {
-    passReady = true;
-}
-passImage.src = "images/pass.png";
-
 // Game objects
 var chef = {
     speed: 256, // Movement in pixels per second
@@ -120,7 +32,7 @@ addEventListener("keyup", function (e) {
     }, false);
 
 // Resets the game; places the chef in the middle of the kitchen
-var reset = function () {
+var init = function () {
     chef.x = width / 2;
     chef.y = height / 2;
     oven.x = 4;
@@ -137,6 +49,8 @@ var reset = function () {
     fridge.y = 4;
     pass.x = width - 132;
     pass.y = height - 260;
+
+    main();
 };
 
 var update = function (modifier) {
@@ -161,66 +75,42 @@ var update = function (modifier) {
 // Draw everything
 var render = function () {
     // Draw Background
-    if (bgReady) {
-        ctx.drawImage(bgImage, 0, 0);
-    }
+        ctx.drawImage(resources.get('images/floor.png'), 0, 0);
 
     // Draw Oven
-    if (ovenReady) {
-        ctx.drawImage(ovenImage, oven.x, oven.y);
-    }
+        ctx.drawImage(resources.get('images/oven.png'), oven.x, oven.y);
 
     // Draw Grill
-    if (grillReady) {
-        ctx.drawImage(grillImage, grill.x, grill.y);
-    }
+        ctx.drawImage(resources.get('images/grill.png'), grill.x, grill.y);
 
     // Draw Fryer1
-    if (fryerReady) {
-        ctx.drawImage(fryerImage, fryer1.x, fryer1.y);
-    }
+        ctx.drawImage(resources.get('images/fryer.png'), fryer1.x, fryer1.y);
 
     // Draw Fryer2
-    if (fryerReady) {
-        ctx.drawImage(fryerImage, fryer2.x, fryer2.y);
-    }
+        ctx.drawImage(resources.get('images/fryer.png'), fryer2.x, fryer2.y);
 
     // Draw Cooler
-    if (coolerReady) {
-        ctx.drawImage(coolerImage, cooler.x, cooler.y);
-    }
+        ctx.drawImage(resources.get('images/cooler.png'), cooler.x, cooler.y);
 
     // Draw Fridge
-    if (fridgeReady) {
-        ctx.drawImage(fridgeImage, fridge.x, fridge.y);
-    }
+        ctx.drawImage(resources.get('images/fridge.png'), fridge.x, fridge.y);
 
     // Draw Pass
-    if (passReady) {
-        ctx.drawImage(passImage, pass.x, pass.y);
-    }
+        ctx.drawImage(resources.get('images/pass.png'), pass.x, pass.y);
 
     // Draw Chef
     switch (chef.direction) {
         case 'front':
-            if (chefFrontReady) {
-                ctx.drawImage(chefFrontImage, chef.x, chef.y);
-                }
+                ctx.drawImage(resources.get('images/cheffront.png'), chef.x, chef.y);
             break;
         case 'back':
-            if (chefBackReady) {
-                ctx.drawImage(chefBackImage, chef.x, chef.y);
-            }
+                ctx.drawImage(resources.get('images/chefback.png'), chef.x, chef.y);
             break;
         case 'left':
-            if (chefLeftReady) {
-                ctx.drawImage(chefLeftImage, chef.x, chef.y);
-            }
+                ctx.drawImage(resources.get('images/chefleft.png'), chef.x, chef.y);
             break;
         case 'right':
-            if (chefRightReady) {
-                ctx.drawImage(chefRightImage, chef.x, chef.y);
-            }
+                ctx.drawImage(resources.get('images/chefright.png'), chef.x, chef.y);
             break;
     }             
 };
@@ -243,7 +133,18 @@ var main = function () {
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
-// Let's play this game!
+resources.load([
+        'images/floor.png',
+        'images/cheffront.png',
+        'images/chefback.png',
+        'images/chefright.png',
+        'images/chefleft.png',
+        'images/cooler.png',
+        'images/fridge.png',
+        'images/grill.png',
+        'images/oven.png',
+        'images/pass.png',
+        'images/fryer.png'
+        ]);
 var then = Date.now();
-reset();
-main();
+resources.onReady(init);
