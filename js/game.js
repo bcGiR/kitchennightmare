@@ -99,22 +99,29 @@ var update = function (modifier) {
     }
 
     // Collision Resolution
+    var blocked = false; // If the chef is blocked from moving
     
     // Disallows chef from leaving the kitchen 
     if (chef.x < 0) {
-        chef.x = chef_oldx;
+        blocked = true;
     }
     if (chef.x > width - 64) {
-        chef.x = chef_oldx;
+        blocked = true;
     }
     if (chef.y < 0) {
-        chef.y = chef_oldy;
+        blocked = true;
     }
     if (chef.y > height - 64) {
-        chef.y = chef_oldy;
+        blocked = true
     }
 
     // Disallows chef from walking on top of equipment
+
+    // If the chef is blocked, he doesn't move
+    if (blocked) {
+        chef.x = chef_oldx;
+        chef.y = chef_oldy;
+    }
 };
 
 // Draw everything
