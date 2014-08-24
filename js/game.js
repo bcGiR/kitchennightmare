@@ -40,22 +40,22 @@ var init = function () {
 
     oven.x = 4;
     oven.y = height - 132;
-    oven.width = 128;
+    oven.width = 100;
     oven.height = 128;
 
     grill.x = 4;
     grill.y = oven.y - 132;
-    grill.width = 128;
+    grill.width = 100;
     grill.height = 128;
 
     fryer1.y = grill.y - 68;
     fryer1.x = 16;
-    fryer1.width = 64;
+    fryer1.width = 40;
     fryer1.height = 64;
 
     fryer2.y = fryer1.y - 68;
     fryer2.x = 16;
-    fryer2.width = 64;
+    fryer2.width = 40;
     fryer2.height = 64;
 
     cooler.x = width - 132;
@@ -66,7 +66,7 @@ var init = function () {
     fridge.x = 132;
     fridge.y = 4;
     fridge.width = 128;
-    fridge.height = 128;
+    fridge.height = 64;
 
     pass.x = width - 132;
     pass.y = height - 260;
@@ -119,8 +119,8 @@ var update = function (modifier) {
     equip.forEach (function (elem) {
         if ( !( chef.y + 64 < elem.y ||
                 chef.y > elem.y + elem.height ||
-                chef.x > elem.x + elem.width || 
-                chef.x + 64 < elem.x) ) {
+                chef.x + 16 > elem.x + elem.width || 
+                chef.x + 48 < elem.x) ) {
                 blocked = true;
             }});
 
