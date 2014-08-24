@@ -55,8 +55,8 @@ var init = function () {
 
     fryer2.y = fryer1.y - 68;
     fryer2.x = 16;
-    fryer2.width = 128;
-    fryer2.height = 128;
+    fryer2.width = 64;
+    fryer2.height = 64;
 
     cooler.x = width - 132;
     cooler.y = 116;
@@ -112,10 +112,17 @@ var update = function (modifier) {
         blocked = true;
     }
     if (chef.y > height - 64) {
-        blocked = true
+        blocked = true;
     }
 
     // Disallows chef from walking on top of equipment
+    equip.forEach (function (elem) {
+        if ( !( chef.y + 64 < elem.y ||
+                chef.y > elem.y + elem.height ||
+                chef.x > elem.x + elem.width || 
+                chef.x + 64 < elem.x) ) {
+                blocked = true;
+            }});
 
     // If the chef is blocked, he doesn't move
     if (blocked) {
