@@ -32,7 +32,7 @@ addEventListener("keyup", function (e) {
     delete keysDown[e.keyCode];
     }, false);
 
-// Resets the game; places the chef in the middle of the kitchen
+// Resets the game; places the chef in the middle of the kitchen, places equipment around
 var init = function () {
 
     chef.x = width / 2;
@@ -42,26 +42,31 @@ var init = function () {
     oven.y = height - 132;
     oven.width = 100;
     oven.height = 128;
+    oven.on = false;
 
     grill.x = 4;
     grill.y = oven.y - 132;
     grill.width = 100;
     grill.height = 128;
+    grill.on = false;
 
     fryer1.y = grill.y - 68;
     fryer1.x = 16;
     fryer1.width = 40;
     fryer1.height = 64;
+    fryer1.on = false;
 
     fryer2.y = fryer1.y - 68;
     fryer2.x = 16;
     fryer2.width = 40;
     fryer2.height = 64;
+    fryer2.on = false;
 
     cooler.x = width - 132;
     cooler.y = 116;
     cooler.width = 128;
     cooler.height = 128;
+    cooler.on = false;
 
     fridge.x = 132;
     fridge.y = 4;
